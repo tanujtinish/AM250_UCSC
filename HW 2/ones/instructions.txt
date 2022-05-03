@@ -1,0 +1,16 @@
+to run ones.f90
+
+A.
+1. Install gfortran
+2. go to folder trap with files ones.90 and makefile
+3. Run command: make -s
+4. Provide the inputs for the dimension of the square array 
+
+
+
+B. Alternatively
+1. Install gfortran
+2. go to folder trap with file ones.90
+3. Run command: gfortran -o object_code ones.f90
+4. Run command: ./object_code
+5. Provide the inputs for the dimension of the square array 

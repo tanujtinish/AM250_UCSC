@@ -1,0 +1,16 @@
+to run trap.f90
+
+A.
+1. Install gfortran
+2. go to folder ones with files trap.f90 and makefile
+3. Run command: make -s
+4. Provide the inputs for the upper limit of the integration, the lower limit of the integration, and the number of intervals N for the integration
+
+
+
+B. Alternatively
+1. Install gfortran
+2. go to folder trap with file trap.f90
+3. Run command: gfortran -o object_code trap.f90
+4. Run command: ./object_code
+5. Provide the inputs for the upper limit of the integration, the lower limit of the integration, and the number of intervals N for the integration

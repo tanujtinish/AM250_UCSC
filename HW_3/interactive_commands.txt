@@ -1,0 +1,17 @@
+qsub -q newest -l nodes=1:ppn=4 -I
+cd $PBS_O_WORKDIR
+mpirun -np 4 ./hello_mpi_grape
+
+qsub -q newest -l nodes=2:ppn=4 -I
+cd $PBS_O_WORKDIR
+mpirun -np 8 ./hello_mpi_grape
+
+qsub -q newest -l nodes=1:ppn=4 -I
+cd $PBS_O_WORKDIR
+export OMP_NUM_THREADS=4
+./hello_omp_grape
+
+qsub -q newest -l nodes=1:ppn=8 -I
+cd $PBS_O_WORKDIR
+export OMP_NUM_THREADS=8
+./hello_omp_grape
