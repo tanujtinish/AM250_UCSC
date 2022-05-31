@@ -58,9 +58,9 @@ PROGRAM matrix_op
     write (*,*) "------------------------------------------------------------------"
 
     t1 = omp_get_wtime()
-    !$OMP WORKSHARE
+    !$OMP PARALLEL WORKSHARE
     C = matmul(A, B)
-    !$OMP END WORKSHARE
+    !$OMP END PARALLEL WORKSHARE
     t2 = omp_get_wtime()
     write (*,*) "------------------------------------------------------------------"
     print *,'Time taken by OpenMP workshare for matrix Mult is: ', t2 - t1, ' s'
