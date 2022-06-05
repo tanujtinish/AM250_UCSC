@@ -133,51 +133,40 @@ program ones
     use, intrinsic :: ISO_C_BINDING
     implicit none
     
-    integer :: N, timming_array_index
-    INTEGER, ALLOCATABLE, target :: inputSquareArray(:,:)
-    INTEGER, ALLOCATABLE :: paddedInputSquareArray(:,:)
-    INTEGER, ALLOCATABLE :: outputSquareArray(:,:)
-    real(kind=8) :: start, end
-    real(kind=8) :: total_time, tc
+    real(kind=8), dimension(6) :: timming_array
+    integer :: timming_array_index
     
-    integer, dimension(6) :: timming_array
-    timming_array = (/ 500, 1000, 3000, 6000, 9000, 15000/)
+    real(kind=8) :: total_time1,total_time2,total_time3,total_time, sqrt_p
+    real(kind=8) :: ts,tw,tc, N,p
+
+    tc=0.000000131284970928
+    ts=0.007997999
+    tw=0.0005823312
+    p=4
+    sqrt_p= sqrt(real(p,8))
+
+    write(*, *) ts,tw,tc
+
+    timming_array = (/ 20, 100, 500, 1000, 3000, 6000/)
     
     timming_array_index = 1
     do while (timming_array_index .le. 6)
-
+        total_time=0
+        
         N=timming_array(timming_array_index)
 
-        call cpu_time(start)
+        total_time = real(tc*((N*N)/(P))) 
+        total_time = total_time + real(4*ts)
+        total_time = total_time + real(4*tw)*real( (N/sqrt_p) +1 )
 
-        call generate_input_square_array( inputSquareArray, N)
-        call generate_input_padded_square_array( inputSquareArray, paddedInputSquareArray, N)
-        call generate_output_square_array( paddedInputSquareArray, outputSquareArray, N)
-        
-        call cpu_time(end)
-
-        total_time = (end - start)
-        tc = (total_time)/(N*N)
+        timming_array_index=timming_array_index+1
 
         write(*, *) 'For N: ',N
         write(*, *) 'Total time taken: ',total_time
-        write(*, *) 'Tc: ',tc
         write (*,*) "------------------------------------------------------------------"
 
-        ! write (*,*) NEW_LINE('!')
-        ! write (*,*) "Randomly generated input square array: "
-        ! call print_square_array( inputSquareArray)
-        ! write (*,*) "------------------------------------------------------------------"
-        
-        ! write (*,*) NEW_LINE('!')
-        ! write (*,*) "Output square array: "
-        ! call print_square_array( outputSquareArray)
-        
-        timming_array_index=timming_array_index+1
-
-        deallocate( inputSquareArray )
-        deallocate( paddedInputSquareArray )
-        deallocate( outputSquareArray )
     end do
+    
+    
 
 end program ones
